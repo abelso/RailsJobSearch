@@ -2,13 +2,13 @@
 
 ## Software versions used
 
-Ruby 2.7.2p137
-Rails 6.0.3.4
-Docker 19.03.13
+Ruby 2.7.2p137  
+Rails 6.0.3.4  
+Docker 19.03.13  
 
 ## Configuration
 
-Download and install Ruby on Windows 10
+Download and install Ruby on Windows 10  
 https://rubyinstaller.org/
 
 Install Ruby on Rails by running command
@@ -16,7 +16,7 @@ Install Ruby on Rails by running command
 gem install rails
 ```
 
-Download and install Docker Desktop
+Download and install Docker Desktop  
 https://www.docker.com/products/docker-desktop
 
 Create Postgres container
@@ -31,10 +31,10 @@ rails -v
 docker -v
 ```
 
-Download and install pgAadmin
+Download and install pgAadmin  
 https://www.pgadmin.org/
 
-Connect to postgres (localhost:5432)
+Connect to postgres (localhost:5432)  
 If database doesn't exist create a database named RailsJobSearch
 
 Create local_env.yml file in config folder and add environment variables for your gmail account
