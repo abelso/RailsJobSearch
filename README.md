@@ -19,16 +19,16 @@ gem install rails
 Download and install Docker Desktop  
 https://www.docker.com/products/docker-desktop
 
-Create Postgres container
-```console
-docker run --name pg -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=RailsJobSearch postgres
-```
-
 Check if Ruby, Rails and Docker are installed by running commands
 ```console
 ruby -v
 rails -v
 docker -v
+```
+
+Create Postgres container
+```console
+docker run --name pg -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=RailsJobSearch postgres
 ```
 
 Download and install pgAadmin  
