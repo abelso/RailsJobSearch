@@ -1,0 +1,9 @@
+<div style="width:100%; background:#389d3a;">
+  <h1 style="text-align:center; padding:10px 0; color:#fff; margin:0">Rails Job Search</h1>
+</div>
+<div style="border:10px solid #389d3a; border-top:0; padding-left:20px">
+  <h2 style="color:#555; margin-top:0; padding-top:20px">Prijava za posao <%= @job.title %></h2>
+  <p style="color:#555"><strong>Tvrtka: </strong><%= @job.name %></p>
+  <p style="color:#555"><strong>Email: </strong><%= @job.email %></p>
+  <p style="color:#555"><strong>Datum prijave: </strong><%= @application.created_at.strftime("%d.%m.%Y.") %></p>
+</div>

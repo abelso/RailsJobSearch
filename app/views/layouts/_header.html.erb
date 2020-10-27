@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <div class="d-flex flex-grow-1">
+      <%= link_to "Rails Job Search", root_path, class: "navbar-brand" %>
+      <% if current_user %>
+        <%= link_to "Kreiraj novi posao", new_job_path, class: "btn btn-success my-sm-0 clr-white" %>
+      <% end %>
+    </div>
+    <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar7">
+      <ul class="navbar-nav ml-auto flex-nowrap">
+        <% if current_user %>
+          <span class="navbar-text clr-white"><%= current_user.email %></span>
+        <% end %>
+        <li class="nav-item">
+          <% if current_user%>
+            <%= link_to "Odjava", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          <% else %>
+            <%= link_to "Prijava", new_user_session_path, class: "nav-link" %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

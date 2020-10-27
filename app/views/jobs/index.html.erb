@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Popis poslova</h1>
+<!-- 
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Category</th>
+      <th>Deadline</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @jobs.each do |job| %>
+      <tr>
+        <td><%= job.title %></td>
+        <td><%= job.description %></td>
+        <td><%= job.name %></td>
+        <td><%= job.email %></td>
+        <td><%= job.category %></td>
+        <td><%= job.deadline %></td>
+        <td><%= link_to 'Show', job %></td>
+        <td><%= link_to 'Edit', edit_job_path(job) %></td>
+        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+-->
+<% @jobs.each do |job| %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title"><%= link_to job.title, job, class: "job-card-title" %></h5>
+      <p class="card-text company-name"><%= job.name %></p>
+      <p class="card-text"><%= job.description[0...250].concat("...") %></p>
+      <span class="badge badge-secondary"><%= job.category %></span>
+      <% if job.deadline < DateTime.now %>
+        <p class="mb-0 mt-2"><strong>Rok prijave: </strong><span class="job_expired">Istekao<span></p>
+      <% else %>
+        <p class="mb-0 mt-2"><strong>Rok prijave: </strong><span class="job_active"><%= job.deadline.strftime("%d.%m.%Y.") %><span></p>
+      <% end %>
+    </div>
+  </div>
+<% end %>

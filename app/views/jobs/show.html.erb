@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @job.title %></h1>
+<p class="company-name"><%= @job.name %></p>
+<p><%= @job.description %></p>
+<% if @job.deadline < DateTime.now %>
+  <p><strong>Rok prijave: </strong><span class="job_expired">Istekao<span></p>
+<% else %>
+  <p><strong>Rok prijave: </strong><span class="job_active"><%= @job.deadline.strftime("%d.%m.%Y.") %><span></p>
+<% end %>
+<%= link_to 'Nazad', jobs_path, class: "btn btn-secondary clr-white" %>
+<% if current_user %>
+  <%= link_to 'Ažuriranje', edit_job_path(@job), class: "btn btn-primary clr-white" %>
+  <%= link_to 'Brisanje', @job, method: :delete, data: { confirm: 'Želite li obrisati posao?' }, class: "btn btn-danger clr-white" %>
+<% end %>
+
+<hr>
+<!-- List all job applications -->
+<% if current_user %>
+  <h2>Prijave za posao</h2>
+  <% if @applications.count > 0 %>
+    <% @applications.each do |application| %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title"><%= application.first_name + " " + application.last_name %> <span class="badge badge-success"><%= application.qualification %></h5>
+          <p class="card-text"><strong>Email: </strong><%= application.email %></p>
+          <p class="card-text"><strong>Adresa: </strong><%= application.address %></p>
+          <p class="card-text"><strong>Telefon: </strong><%= application.telephone %></p>
+          <p class="card-text"><strong>Datum prijave: </strong><%= application.created_at.strftime("%d.%m.%Y.") %></p>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>Nema prijava</p>
+  <% end %>
+<% else %>
+  <% if @job.deadline > DateTime.now %>
+    <h2>Prijava za posao</h2>
+    <%= render 'application_form', application: @application %>
+  <% end %>
+<% end %> 
