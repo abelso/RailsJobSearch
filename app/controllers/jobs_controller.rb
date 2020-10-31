@@ -10,10 +10,12 @@ class JobsController < ApplicationController
   # GET /jobs/1
   # GET /jobs/1.json
   def show
-    @application = Application.new
-    @application.job_id = @job.id
-
-    @applications = @job.applications
+    if current_user
+      @applications = @job.applications
+    else
+      @application = Application.new
+      @application.job_id = @job.id
+    end
   end
 
   # GET /jobs/new

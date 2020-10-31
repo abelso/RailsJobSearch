@@ -26,12 +26,15 @@ class ApplicationsController < ApplicationController
   def create
     @application = Application.new(application_params)
     @job = Job.find(@application.job_id)
-    cv = params[:application][:cv].tempfile.path
+    cv = params[:application][:cv]
+    if cv
+      cv_path = cv.tempfile.path
+    end
 
     respond_to do |format|
       if @application.save
         ApplicantMailer.application_notice(@application, @job).deliver_now
-        CompanyMailer.application_notice(@application, @job, cv).deliver_now
+        CompanyMailer.application_notice(@application, @job, cv_path).deliver_now
         format.html { redirect_to @application, notice: 'Application was successfully created.' }
         format.json { render :show, status: :created, location: @application }
       else

@@ -5,12 +5,13 @@ class CompanyMailer < ApplicationMailer
   #
   #   en.company_mailer.application_notice.subject
   #
-  def application_notice(application, job, cv)
+  def application_notice(application, job, cv_path)
     @application = application
     @job = job
-    @cv = cv
 
-    attachments[@application.first_name + "_" + @application.last_name + "_CV" + File.extname(@cv)] = File.read(@cv, mode: "rb")
+    if cv_path
+      attachments[@application.first_name + "_" + @application.last_name + "_CV" + File.extname(cv_path)] = File.read(cv_path, mode: "rb")
+    end
     mail to: @job.email, subject: "Prijava za posao: " + @job.title
   end
 end
