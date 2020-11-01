@@ -45,6 +45,7 @@ end
 
 group :test do
   gem 'simplecov', require: false
+  gem "factory_bot_rails"
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
