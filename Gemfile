@@ -44,6 +44,7 @@ group :development do
 end
 
 group :test do
+  gem 'database_cleaner-active_record'
   gem 'simplecov', require: false
   gem "factory_bot_rails"
   # Adds support for Capybara system testing and selenium driver
