@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Jobs', type: :request do
   describe 'GET /jobs' do
+    let!(:job) { FactoryBot.create(:job) }
+
     it 'returns all jobs' do
-      FactoryBot.create(:job)
       get '/jobs'
 
       expect(response).to have_http_status(:success)
@@ -12,25 +13,27 @@ RSpec.describe 'Jobs', type: :request do
   end
 
   describe 'GET /jobs/:id' do
-    job = FactoryBot.create(:job) do |job|
-      FactoryBot.create_list(:application, 1, job: job)
-    end
+    let!(:job) { FactoryBot.create(:job) }
+    let!(:application) { FactoryBot.create(:application, job: job) }
+    let!(:user) { FactoryBot.create(:user) }
 
-    it 'returns job and associated applications' do
-      user = FactoryBot.create(:user)
+    it 'returns a job and associated applications' do
       sign_in user
       get "/jobs/#{job.id}"
+
       expect(response).to have_http_status(:success)
       expect(response.body).to include('Rails Developer')
+      expect(response.body).to include('Prijave za posao')
       expect(response.body).to include('Connery')
-      puts response.body
     end
 
-    it 'returns a job' do
+    it 'returns a job and the application form' do
+      sign_out user
       get "/jobs/#{job.id}"
 
       expect(response).to have_http_status(:success)
       expect(response.body).to include('Rails Developer')
+      expect(response.body).to include('Prijava za posao')
     end
   end
 
@@ -64,7 +67,6 @@ RSpec.describe 'Jobs', type: :request do
 
       expect(response).to redirect_to(@job)
       follow_redirect!
-
       expect(response.body).to include('Ruby on Rails Developer')  
     end
 
