@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Jobs', type: :request do
   describe 'GET /jobs' do
     it 'returns all jobs' do
-      FactoryBot.create(:job, title: 'Rails Developer', description: 'Some description', name: 'Ingemark', email: 'ingemark@asd.asd', category: 'IT', deadline: '2020-11-15')
+      FactoryBot.create(:job)
       get '/jobs'
 
       expect(response).to have_http_status(:success)
@@ -12,7 +12,19 @@ RSpec.describe 'Jobs', type: :request do
   end
 
   describe 'GET /jobs/:id' do
-    let!(:job) { FactoryBot.create(:job, title: 'Rails Developer', description: 'Some description', name: 'Ingemark', email: 'ingemark@asd.asd', category: 'IT', deadline: '2020-11-15') }
+    job = FactoryBot.create(:job) do |job|
+      FactoryBot.create_list(:application, 1, job: job)
+    end
+
+    it 'returns job and associated applications' do
+      user = FactoryBot.create(:user)
+      sign_in user
+      get "/jobs/#{job.id}"
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include('Rails Developer')
+      expect(response.body).to include('Connery')
+      puts response.body
+    end
 
     it 'returns a job' do
       get "/jobs/#{job.id}"
@@ -45,7 +57,7 @@ RSpec.describe 'Jobs', type: :request do
   end
 
   describe 'PATCH /jobs/:id' do
-    let!(:job) { FactoryBot.create(:job, title: 'Rails Developer', description: 'Some description', name: 'Ingemark', email: 'ingemark@asd.asd', category: 'IT', deadline: '2020-11-15') }
+    let!(:job) { FactoryBot.create(:job) }
 
     it 'updates a job' do
       patch "/jobs/#{job.id}", params: { job: { title: 'Ruby on Rails Developer' } }
@@ -64,7 +76,7 @@ RSpec.describe 'Jobs', type: :request do
   end
 
   describe 'DELETE /jobs/:id' do
-    let!(:job) { FactoryBot.create(:job, title: 'Rails Developer', description: 'Some description', name: 'Ingemark', email: 'ingemark@asd.asd', category: 'IT', deadline: '2020-11-15') }
+    let!(:job) { FactoryBot.create(:job) }
 
     it 'deletes a job' do
       expect {
