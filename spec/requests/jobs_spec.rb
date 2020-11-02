@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe 'Jobs', type: :request do
   describe 'GET /jobs' do
     let!(:job) { FactoryBot.create(:job) }
-
+    
     it 'returns all jobs' do
       get '/jobs'
 
       expect(response).to have_http_status(:success)
-      expect(response.body).to include('Rails Developer')
+      expect(response.body).to include(job.title)
     end
   end
 
@@ -19,20 +19,19 @@ RSpec.describe 'Jobs', type: :request do
 
     it 'returns a job and associated applications' do
       sign_in user
-      get "/jobs/#{job.id}"
+      get "/jobs/#{job.id}/applications"
 
       expect(response).to have_http_status(:success)
-      expect(response.body).to include('Rails Developer')
-      expect(response.body).to include('Prijave za posao')
-      expect(response.body).to include('Connery')
+      expect(response.body).to include(job.title)
+      expect(response.body).to include(application.first_name)
     end
 
     it 'returns a job and the application form' do
       sign_out user
-      get "/jobs/#{job.id}"
+      get "/jobs/#{job.id}/applications"
 
       expect(response).to have_http_status(:success)
-      expect(response.body).to include('Rails Developer')
+      expect(response.body).to include(job.title)
       expect(response.body).to include('Prijava za posao')
     end
   end
@@ -60,12 +59,16 @@ RSpec.describe 'Jobs', type: :request do
   end
 
   describe 'PATCH /jobs/:id' do
+    let!(:user) { FactoryBot.create(:user) }
     let!(:job) { FactoryBot.create(:job) }
 
     it 'updates a job' do
+      sign_in user
       patch "/jobs/#{job.id}", params: { job: { title: 'Ruby on Rails Developer' } }
 
-      expect(response).to redirect_to(@job)
+      expect(response).to redirect_to(job)
+      follow_redirect!
+      expect(response).to redirect_to(job_applications_path(job))
       follow_redirect!
       expect(response.body).to include('Ruby on Rails Developer')  
     end
