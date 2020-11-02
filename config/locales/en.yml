@@ -30,4 +30,52 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      application:
+        email: 'E-mail address'
+    errors:
+      models:
+        user:
+          attributes:
+            first_name:
+              blank: 'Morate upisati svoje ime!'
+            last_name:
+              blank: 'Morate upisati svoje prezime!'
+            email:
+              blank: 'Morate upisati Email adresu poslodavca!'
+              invalid: 'Email adresa mora biti valjana!'
+            password:
+              blank: 'Morate upisati valjanu lozinku!'
+        job:
+          attributes:
+            title:
+              blank: 'Morate upisati naziv posla!'
+            description:
+              blank: 'Morate upisati opis posla!'
+            name:
+              blank: 'Morate upisati ime poslodavca!'
+            email:
+              blank: 'Morate upisati Email adresu poslodavca!'
+              invalid: 'Email adresa mora biti valjana!'
+            category:
+              blank: 'Morate upisati valjani kategoriju posla!'
+            deadline:
+              blank: 'Morate upisati rok prijave!'
+        application:
+          attributes:
+            first_name:
+              blank: 'Morate upisati svoje ime!'
+            last_name:
+              blank: 'Morate upisati svoje prezime!'
+            dob:
+              blank: 'Morate upisati svoj datum rođenja!'
+            email:
+              blank: 'Morate upisati svoju Email adresu!'
+              invalid: 'Email adresa mora biti valjana!'
+            telephone:
+              blank: 'Morate upisati valjani broj telefona!'
+            address:
+              blank: 'Morate upisati adresu!'
+            qualification:
+              blank: 'Morate upisati svoju stručnu spremu!'
