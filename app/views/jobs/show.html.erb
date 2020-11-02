@@ -33,9 +33,4 @@
   <% else %>
     <p>Nema prijava</p>
   <% end %>
-<% else %>
-  <% if @job.deadline > DateTime.now %>
-    <h2>Prijava za posao</h2>
-    <%= render 'application_form', application: @application %>
-  <% end %>
 <% end %> 

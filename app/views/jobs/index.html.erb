@@ -1,38 +1,4 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Popis poslova</h1>
-<!-- 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Category</th>
-      <th>Deadline</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @jobs.each do |job| %>
-      <tr>
-        <td><%= job.title %></td>
-        <td><%= job.description %></td>
-        <td><%= job.name %></td>
-        <td><%= job.email %></td>
-        <td><%= job.category %></td>
-        <td><%= job.deadline %></td>
-        <td><%= link_to 'Show', job %></td>
-        <td><%= link_to 'Edit', edit_job_path(job) %></td>
-        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-
-</table>
--->
 <% @jobs.each do |job| %>
   <div class="card mb-3">
     <div class="card-body">

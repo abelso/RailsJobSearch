@@ -11,13 +11,19 @@
         <% if current_user %>
           <span class="navbar-text clr-white"><%= current_user.email %></span>
         <% end %>
-        <li class="nav-item">
           <% if current_user%>
-            <%= link_to "Odjava", destroy_user_session_path, method: :delete, class: "nav-link" %>
+            <li class="nav-item">
+              <%= link_to "Odjava", destroy_user_session_path, method: :delete, class: "nav-link" %>
+            </li>
           <% else %>
-            <%= link_to "Prijava", new_user_session_path, class: "nav-link" %>
+            <li class="nav-item">
+              <%= link_to "Registracija", new_user_registration_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Prijava", new_user_session_path, class: "nav-link" %>
+            </li>
           <% end %>
-        </li>
+        
       </ul>
     </div>
   </div>

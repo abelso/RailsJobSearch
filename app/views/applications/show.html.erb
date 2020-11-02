@@ -1,44 +1,10 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>First name:</strong>
-  <%= @application.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @application.last_name %>
-</p>
-
-<p>
-  <strong>Dob:</strong>
-  <%= @application.dob %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @application.email %>
-</p>
-
-<p>
-  <strong>Telephone:</strong>
-  <%= @application.telephone %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @application.address %>
-</p>
-
-<p>
-  <strong>Qualification:</strong>
-  <%= @application.qualification %>
-</p>
-
-<p>
-  <strong>Job:</strong>
-  <%= @application.job_id %>
-</p>
-
-<%= link_to 'Edit', edit_application_path(@application) %> |
-<%= link_to 'Back', applications_path %>
+<h3 class="text-success text-center mb-5">Bravo <%= @application.first_name + " " + @application.last_name %>, prijavili ste se na posao!</h3>
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title"><%= @job.title %></h5>
+    <span class="badge badge-secondary mt-0 mb-3"><%= @job.category %></span>
+    <p class="card-text"><%= @job.description %></p>
+    <p class="card-text"><strong>Tvrtka: </strong><%= @job.name %></p>
+    <p class="card-text">Za više informacija kontaktirajte nas na <%= mail_to(@job.email, @job.email, subject: "Upit za posao #{@job.title}") %></p>
+  </div>
+</div>

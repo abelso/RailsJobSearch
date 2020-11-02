@@ -1,13 +1,14 @@
 <%= form_with(model: job, local: true) do |form| %>
   <% if job.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(job.errors.count, "error") %> prohibited this job from being saved:</h2>
-
-      <ul>
-        <% job.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+    <div class="card container mb-4 mt-4">
+      <div class="card-body">
+        <h5 class="card-title">Kreiranje posla ima <%= job.errors.count %> grešaka</h5>
+        <div class="alert alert-danger" role="alert">
+          <% job.errors.values.each do |message| %>
+            <p><%= message.join(' ') %></p>
+          <% end %>
+        </div>
+      </div>
     </div>
   <% end %>
 
@@ -38,7 +39,7 @@
 
   <div class="field form-group">
     <%= form.label :deadline, 'Rok prijave' %><br>
-    <%= form.date_select :deadline, class: 'form-control' %>
+    <%= form.date_field :deadline, class: 'form-control' %>
   </div>
 
   <div class="actions">

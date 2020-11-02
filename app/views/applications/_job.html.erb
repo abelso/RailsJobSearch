@@ -1,0 +1,15 @@
+<h1><%= @job.title %></h1>
+<p class="company-name"><%= @job.name %></p>
+<p><%= @job.description %></p>
+<% if @job.deadline < DateTime.now %>
+  <p><strong>Rok prijave: </strong><span class="job_expired">Istekao<span></p>
+<% else %>
+  <p><strong>Rok prijave: </strong><span class="job_active"><%= @job.deadline.strftime("%d.%m.%Y.") %><span></p>
+<% end %>
+<%= link_to 'Nazad', jobs_path, class: "btn btn-secondary clr-white" %>
+<% if current_user %>
+  <%= link_to 'Ažuriranje', edit_job_path(@job), class: "btn btn-primary clr-white" %>
+  <%= link_to 'Brisanje', @job, method: :delete, data: { confirm: 'Želite li obrisati posao?' }, class: "btn btn-danger clr-white" %>
+<% end %>
+
+<hr>
