@@ -22,6 +22,11 @@ module Railsjobsearch
         ENV[key.to_s] = value
       end if File.exists?(env_file)
     end
+
+    # Disable changing html on errors
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
+      html_tag
+    }
   end
 end
 
