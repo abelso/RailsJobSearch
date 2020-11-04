@@ -61,8 +61,7 @@ RSpec.describe Application, type: :model do
 
   describe 'associations' do
     it 'belongs to job' do
-      t = Application.reflect_on_association(:job)
-      expect(t.macro).to eq(:belongs_to)
+      expect(Application.reflect_on_association(:job).macro).to eq(:belongs_to)
     end
   end
 end
